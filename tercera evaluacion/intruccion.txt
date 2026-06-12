@@ -1,0 +1,25 @@
+Estimados estudiantes,
+
+De acuerdo a lo comprometido, ya se encuentra disponible la Tarea N°3 asociada a nuestra asignatura de Minería de Datos. En esta oportunidad, el desafío consistirá en aplicar las técnicas de diagnóstico, limpieza y transformación de datos abordadas en la última sesión.
+
+Para el desarrollo de la actividad, ustedes tendrán la libertad de explorar, elegir y descargar un set de datos real directamente desde la plataforma kaggle.com/datasets.
+
+Aspectos clave para la entrega:
+
+Plazo de entrega: Próximo jueves 11 de junio a las 23:59 hrs.
+
+Formato de los archivos: Deberán subir el cuaderno de Python editable (formatos .ipynb) y el archivo de datos original (formato .csv).
+
+Identificación: Asegúrense de incluir el nombre completo de él o los integrantes dentro del código y en el nombre del archivo.
+
+Modalidad: Grupal (máximo 2 personas) o individual.
+
+Nota: Pueden comprimir ambos archivos en un único formato .zip para facilitar la carga en la plataforma.
+
+La estructura detallada del proyecto, los requisitos técnicos obligatorios que debe cumplir el dataset elegido y la rúbrica de evaluación se encuentran especificados en el archivo PDF adjunto a esta publicación. Les sugiero revisar el material visto hasta la fecha antes de comenzar su desarrollo.
+
+Ante cualquier duda o consulta durante el proceso, no duden en escribirme directamente a mi correo electrónico: pablo.silva@ulagos.cl
+
+¡Mucho éxito en su búsqueda y análisis! Nos vemos en el aula el próximo viernes 5 de junio.
+
+Atentamente,
