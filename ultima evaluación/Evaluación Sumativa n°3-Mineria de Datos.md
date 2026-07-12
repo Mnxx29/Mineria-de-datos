@@ -58,7 +58,7 @@ identificación del problema y objetivos organizacionales.
 
 del dataset y descripción de los datos disponibles.
 
-●  Plan  de  Preparación  de  Datos:  Propuesta  detallada  de  las  técnicas  de  limpieza,
+●  Plan  de  Preparación  de  Datos:  Propuesta  detallada  de  las  técnicas  de  limpieza,
 estrategias  para  el  manejo  de  valores  faltantes  (imputaciones)  y  tratamiento  de
 valores atípicos (outliers).
 
@@ -111,7 +111,7 @@ d.  Evaluación: Aplicar métricas de rendimiento para determinar los resultados
 
 el modelo.
 
-e.  Emplear mapas de calor, gráficos de barras, matriz de correlación, histogramas, matrices de
+e.  Emplear mapas de calor, gráficos de barras, matriz de correlación, histogramas, matrices de
 confusión y cualquier herramienta gráfica que facilite la interpretación de los resultados del
 proyecto.
 
@@ -149,7 +149,7 @@ de revisión de originalidad.
 
 con la finalidad de que los estudiantes puedan subir sus archivos sin inconvenientes.
 
-Caso de estudio: Predicción de Fuga de Clientes (Churn)
+Caso de estudio: Predicción de Fuga de Clientes (Churn)
 
 1.  Contexto del Problema (Business Understanding)
 
@@ -193,7 +193,7 @@ calidad de la información.
 
 sean aptos para el desempeño de los algoritmos.
 
-●  Modeling  &  Evaluation:  Entrenar  1  modelo  de  aprendizaje
+●  Modeling  &  Evaluation:  Entrenar  1  modelo  de  aprendizaje
 supervisado, evaluar su desempeño y determinar las variables que más
 influyen en la fuga. Adicionalmente, los estudiantes deberán entrenar
 un  modelo  de  aprendizaje  no  supervisado,  para  descubrir  reglas  de
@@ -253,7 +253,7 @@ numérica).
 detectar  valores  atípicos  (outliers)  mediante  gráficos  de  caja
 (boxplots) y gráficos de dispersión.
 
-●  Análisis de Correlación: Generar una matriz de correlación
+●  Análisis de Correlación: Generar una matriz de correlación
 para entender cómo se relacionan las variables numéricas con
 la fuga.
 
@@ -287,7 +287,7 @@ Métricas de Costo-Beneficio: Realice un cálculo simple que responda
 a la siguiente interrogante: "Si retener a un cliente cuesta $10 y perderlo
 cuesta $100, ¿cuánto dinero ahorran tus modelos?
 
-5.  Rúbrica de Calificación
+5.  Rúbrica de Calificación
 
 A continuación, se entrega la rúbrica de evaluación con la finalidad de que los estudiantes sean
 calificados en función de los objetivos que propone la Experiencia de Aprendizaje n°2:
