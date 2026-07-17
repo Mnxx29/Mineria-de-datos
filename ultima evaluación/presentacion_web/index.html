@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predicción y Mitigación de Fuga de Clientes - Telco Churn</title>
+    
+    <!-- Google Fonts: Outfit & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js for Interactive Charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Custom CSS Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Progress Bar -->
+    <div id="progress-bar"></div>
+
+    <!-- Top Navigation Bar -->
+    <header class="top-nav">
+        <div class="logo">
+            <span class="brand">U de Los Lagos</span>
+            <span class="separator">|</span>
+            <span class="subtext">Minería de Datos</span>
+        </div>
+        <div class="controls-top">
+            <button id="toggle-sidebar" title="Tabla de Contenidos">
+                <i class="fa-solid fa-list-ul"></i> Mapeo de Presentación
+            </button>
+        </div>
+    </header>
+
+    <!-- Sidebar (Table of Contents) -->
+    <aside id="sidebar">
+        <div class="sidebar-header">
+            <h3>Contenido</h3>
+            <button id="close-sidebar">&times;</button>
+        </div>
+        <ul class="nav-list">
+            <li class="nav-item active" data-slide="0">1. Portada</li>
+            <li class="nav-item" data-slide="1">2. Business Understanding</li>
+            <li class="nav-item" data-slide="2">3. Data Understanding & Prep</li>
+            <li class="nav-item" data-slide="3">4. Modelado Supervisado</li>
+            <li class="nav-item" data-slide="4">5. Evaluación y Overfitting</li>
+            <li class="nav-item" data-slide="5">6. Hipótesis 1 (Supervisado)</li>
+            <li class="nav-item" data-slide="6">7. Hipótesis 2 (No Supervisado)</li>
+            <li class="nav-item" data-slide="7">8. Simulador Costo-Beneficio</li>
+            <li class="nav-item" data-slide="8">9. Propuestas Prácticas</li>
+            <li class="nav-item" data-slide="9">10. Conclusiones</li>
+        </ul>
+        <div class="sidebar-footer">
+            <p>Estudiante: German Aravena</p>
+            <p>Profesor: Pablo Silva</p>
+        </div>
+    </aside>
+
+    <!-- Main Slide Deck Container -->
+    <main id="presentation-container">
+        
+        <!-- Slide 1: Portada -->
+        <section class="slide active" id="slide-0">
+            <div class="slide-content cover-slide">
+                <div class="badge">EVALUACIÓN SUMATIVA N°3 &bull; DEFENSA FINAL</div>
+                <h1>Predicción y Mitigación de Fuga de Clientes (Churn)</h1>
+                <p class="subtitle">Modelo Analítico CRISP-DM e Implementación para Decisiones Estratégicas en Telecomunicaciones</p>
+                
+                <div class="cover-grid">
+                    <div class="cover-card">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <h4>Institución</h4>
+                        <p>Universidad de los Lagos</p>
+                        <p class="detail">ITR Osorno</p>
+                    </div>
+                    <div class="cover-card">
+                        <i class="fa-solid fa-user"></i>
+                        <h4>Presentador</h4>
+                        <p>Germán Aravena</p>
+                        <p class="detail">Estudiante de Ing. Informática</p>
+                    </div>
+                    <div class="cover-card">
+                        <i class="fa-solid fa-chalkboard-user"></i>
+                        <h4>Profesor</h4>
+                        <p>Pablo Silva</p>
+                        <p class="detail">Evaluador del Proyecto</p>
+                    </div>
+                    <div class="cover-card">
+                        <i class="fa-solid fa-calendar"></i>
+                        <h4>Fecha</h4>
+                        <p>17 de Julio de 2026</p>
+                        <p class="detail">Defensa Presencial</p>
+                    </div>
+                </div>
+                
+                <div class="click-to-start">
+                    <span>Presiona <kbd>&rarr;</kbd> o haz clic abajo para iniciar</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 2: Business Understanding -->
+        <section class="slide" id="slide-1">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">02</span>
+                    <h2>Business Understanding: El Impacto de la Fuga</h2>
+                </div>
+                <div class="two-columns">
+                    <div class="column">
+                        <div class="card highlight-card">
+                            <h3><i class="fa-solid fa-triangle-exclamation"></i> El Problema del Churn</h3>
+                            <p>En el mercado de las telecomunicaciones altamente competitivo de California, retener a un cliente es vital. Captar un cliente nuevo cuesta <strong>10 veces más</strong> que retener uno actual.</p>
+                            <p>El abandono del servicio (Churn) genera una pérdida directa de ingresos recurrentes mensuales (MRR) y desestabiliza la planificación financiera de la compañía.</p>
+                        </div>
+                        <div class="card">
+                            <h3><i class="fa-solid fa-bullseye"></i> Objetivos Organizacionales</h3>
+                            <ul>
+                                <li><strong>Predecir</strong> proactivamente los clientes con alto riesgo de abandono.</li>
+                                <li><strong>Identificar</strong> las causas principales (contratos, métodos de pago, etc.).</li>
+                                <li><strong>Diseñar</strong> campañas de marketing específicas de retención basadas en datos reales.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="column flex-center">
+                        <div class="kpi-dashboard">
+                            <div class="kpi-card animate-kpi">
+                                <span class="kpi-value">7,043</span>
+                                <span class="kpi-label">Registros Históricos analizados</span>
+                            </div>
+                            <div class="kpi-card animate-kpi delay-1">
+                                <span class="kpi-value">26.5%</span>
+                                <span class="kpi-label">Tasa General de Churn Histórico</span>
+                            </div>
+                            <div class="kpi-card animate-kpi delay-2">
+                                <span class="kpi-value">10x</span>
+                                <span class="kpi-label">Multiplicador de Costo por nuevo cliente</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 3: Data Understanding & Preparation -->
+        <section class="slide" id="slide-2">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">03</span>
+                    <h2>Comprensión & Preparación de Datos</h2>
+                </div>
+                <div class="three-columns">
+                    <div class="card">
+                        <div class="card-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                        <h3>Análisis Exploratorio (EDA)</h3>
+                        <p>Se examinó la consistencia del dataset:</p>
+                        <ul>
+                            <li>Conversión manual de <code>TotalCharges</code> a numérica (corrigiendo espacios vacíos).</li>
+                            <li><strong>Outliers (IQR)</strong>: Se detectaron 0 outliers reales en variables continuas (antigüedad y cargos). Se justificó técnicamente no eliminar datos para no sesgar la distribución del negocio.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card highlight-card">
+                        <div class="card-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+                        <h3>Balanceo con SMOTE</h3>
+                        <p>El dataset original presentaba un desbalance crítico (5,174 Leales vs 1,869 Fugas).</p>
+                        <p>Se aplicó <strong>SMOTE</strong> (Synthetic Minority Over-sampling Technique) en el conjunto de entrenamiento para equilibrar las clases a <strong>4,130 muestras por clase</strong>, evitando modelos sesgados.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-icon"><i class="fa-solid fa-gears"></i></div>
+                        <h3>Transformaciones Técnicas</h3>
+                        <ul>
+                            <li><strong>StandardScaler</strong> sobre variables cuantitativas para optimizar la convergencia de la Regresión Logística.</li>
+                            <li><strong>Discretización de Variables</strong> continuas en rangos (Bajo, Medio, Alto) para habilitar el algoritmo no supervisado Apriori.</li>
+                            <li><strong>One-Hot Encoding</strong> en variables categóricas.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4: Modeling -->
+        <section class="slide" id="slide-3">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">04</span>
+                    <h2>Modelado: Supervisado y No Supervisado</h2>
+                </div>
+                <div class="two-columns">
+                    <div class="column">
+                        <div class="card">
+                            <h3><i class="fa-solid fa-brain"></i> Aprendizaje Supervisado (Clasificación)</h3>
+                            <p>Se entrenaron dos modelos con la partición de datos 80/20:</p>
+                            <ol>
+                                <li><strong>Regresión Logística</strong>: Modelo estadístico paramétrico, altamente interpretable mediante coeficientes.</li>
+                                <li><strong>Random Forest</strong>: Modelo no paramétrico basado en ensambles de árboles de decisión para capturar relaciones no lineales complejas.</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="card highlight-card">
+                            <h3><i class="fa-solid fa-diagram-project"></i> Aprendizaje No Supervisado (Apriori)</h3>
+                            <p>El objetivo fue descubrir <strong>reglas de asociación</strong> ocultas.</p>
+                            <p><strong>Optimización de Recursos</strong>: El soporte mínimo original de 0.05 generaba más de 15 millones de reglas, colgando la memoria. Se ajustó técnicamente el <code>min_support</code> a **0.12 (12%)**, reduciendo el resultado a **2,583 reglas estratégicas** ejecutables de alto valor.</p>
+                        </div>
+                    </div>
+                    <div class="column flex-center">
+                        <div class="visual-placeholder">
+                            <div class="neural-network-mock">
+                                <div class="layer-dots">
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                </div>
+                                <div class="layer-lines">
+                                    <svg height="120" width="160">
+                                        <line x1="10" y1="20" x2="150" y2="20" style="stroke:rgba(255,255,255,0.2);stroke-width:2" />
+                                        <line x1="10" y1="20" x2="150" y2="60" style="stroke:var(--color-primary);stroke-width:2" />
+                                        <line x1="10" y1="60" x2="150" y2="20" style="stroke:rgba(255,255,255,0.2);stroke-width:2" />
+                                        <line x1="10" y1="60" x2="150" y2="60" style="stroke:var(--color-secondary);stroke-width:2" />
+                                        <line x1="10" y1="100" x2="150" y2="60" style="stroke:var(--color-primary);stroke-width:2" />
+                                        <line x1="10" y1="100" x2="150" y2="100" style="stroke:rgba(255,255,255,0.2);stroke-width:2" />
+                                    </svg>
+                                </div>
+                                <div class="layer-dots">
+                                    <span class="dot secondary"></span>
+                                    <span class="dot secondary"></span>
+                                    <span class="dot secondary"></span>
+                                </div>
+                            </div>
+                            <span class="caption">Estrategia Integrada de Minería: Clasificación + Asociación</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: Evaluation & Overfitting -->
+        <section class="slide" id="slide-4">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">05</span>
+                    <h2>Evaluación: El Peligro del Overfitting</h2>
+                </div>
+                <div class="two-columns">
+                    <div class="column flex-center">
+                        <div style="width: 100%; height: 320px; position: relative;">
+                            <canvas id="metricsChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="card highlight-card">
+                            <h3><i class="fa-solid fa-circle-check"></i> Regresión Logística (Recomendado)</h3>
+                            <p>Presenta un rendimiento extremadamente consistente:</p>
+                            <ul>
+                                <li><strong>Accuracy</strong>: 78.51% (Train) vs <strong>75.91% (Test)</strong></li>
+                                <li><strong>Recall (Test)</strong>: <strong>69.25%</strong> (Estable, captura 7 de cada 10 fugas reales).</li>
+                                <li><strong>Diagnóstico</strong>: Sin Overfitting. Gran capacidad de generalización.</li>
+                            </ul>
+                        </div>
+                        <div class="card danger-card">
+                            <h3><i class="fa-solid fa-triangle-exclamation"></i> Random Forest (Descartado)</h3>
+                            <p>Sufre de un <strong>Overfitting Severo</strong>:</p>
+                            <ul>
+                                <li><strong>Accuracy</strong>: 99.88% (Train) vs <strong>76.19% (Test)</strong>.</li>
+                                <li><strong>Recall</strong>: Cae drásticamente de <strong>99.80% (Train) a 60.70% (Test)</strong>.</li>
+                                <li><strong>Diagnóstico</strong>: El modelo memorizó el ruido y fallaría en producción.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6: Hypothesis 1 (Supervised) -->
+        <section class="slide" id="slide-5">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">06</span>
+                    <h2>Validación Hipótesis 1: Variables de Mayor Riesgo</h2>
+                </div>
+                <div class="two-columns">
+                    <div class="column">
+                        <div class="card highlight-card">
+                            <h3><i class="fa-solid fa-check-double"></i> Hipótesis 1: Factores de Fuga</h3>
+                            <p class="hypothesis-quote">"El contrato mes a mes, los métodos de pago no automáticos y las tarifas elevadas de fibra óptica son los principales inductores del abandono."</p>
+                            <p><strong>Resultado: VALIDADA plenamente</strong>. El modelo supervisado aisló el impacto individual de las variables.</p>
+                        </div>
+                        <div class="card">
+                            <h3>Interpretación de Coeficientes</h3>
+                            <ul>
+                                <li><strong>Cheque Electrónico (Electronic Check)</strong>: Coeficiente de <strong>+3.69</strong>. Es el método con mayor fricción y menor fidelización.</li>
+                                <li><strong>Contrato Mes a Mes (Month-to-month)</strong>: Coeficiente de <strong>+3.55</strong>. La falta de permanencia incentiva el abandono inmediato.</li>
+                                <li><strong>Internet Fibra Óptica (Fiber optic)</strong>: Coeficiente de <strong>+2.72</strong>. Tarifas elevadas y posibles incidentes de soporte técnico aumentan el Churn.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="column flex-center">
+                        <div style="width: 100%; height: 320px; position: relative;">
+                            <canvas id="coefficientsChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 7: Hypothesis 2 (Unsupervised) -->
+        <section class="slide" id="slide-6">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">07</span>
+                    <h2>Validación Hipótesis 2: Reglas de Asociación</h2>
+                </div>
+                <div class="two-columns">
+                    <div class="column">
+                        <div class="card highlight-card">
+                            <h3><i class="fa-solid fa-share-nodes"></i> Hipótesis 2: Combinaciones Críticas</h3>
+                            <p class="hypothesis-quote">"El modelo no supervisado revelará reglas de asociación fuertes que relacionen contratos cortos y falta de servicios de asistencia técnica con la deserción."</p>
+                            <p><strong>Resultado: VALIDADA</strong>. El algoritmo Apriori encontró patrones combinatorios de alta probabilidad.</p>
+                        </div>
+                        <div class="rule-box">
+                            <div class="rule-title">Regla de Oro Encontrada (ID #12)</div>
+                            <div class="rule-formula">
+                                <span>{Contrato Mes a Mes, Sin Seguridad Online, Sin Soporte Técnico, Internet Fibra Óptica}</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                                <span class="rule-consequent">Fuga de Cliente (Churn_Yes)</span>
+                            </div>
+                            <div class="rule-stats">
+                                <div class="stat-mini"><strong>Soporte:</strong> 12.16% (855 casos)</div>
+                                <div class="stat-mini"><strong>Confianza:</strong> 60.13%</div>
+                                <div class="stat-mini"><strong>Lift:</strong> 3.26x</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="card">
+                            <h3>Significado Métrico para el Negocio</h3>
+                            <ul>
+                                <li><strong>Soporte (12.16%)</strong>: Representa un segmento masivo de la cartera de clientes, no un nicho aislado.</li>
+                                <li><strong>Confianza (60.13%)</strong>: Si un cliente cumple estos 4 factores, la probabilidad de que se vaya en los próximos 30 días es de 6 de cada 10.</li>
+                                <li><strong>Lift (3.26x)</strong>: Este grupo de clientes tiene **más del triple de probabilidad** de fugarse en comparación con un cliente promedio de la compañía.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 8: Interactive Cost-Benefit Simulator -->
+        <section class="slide" id="slide-7">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">08</span>
+                    <h2>Simulador de Negocio: Retorno de Inversión (ROI)</h2>
+                </div>
+                <div class="two-columns">
+                    <div class="column">
+                        <div class="card highlight-card">
+                            <h3><i class="fa-solid fa-sliders"></i> Parámetros Financieros</h3>
+                            <p>Ajusta los costos para simular el impacto financiero del modelo de Regresión Logística:</p>
+                            
+                            <div class="simulator-control">
+                                <div class="control-label">
+                                    <span>Costo de Retención (Campañas/Descuento):</span>
+                                    <span class="value-display" id="retention-cost-val">$10 USD</span>
+                                </div>
+                                <input type="range" id="input-retention-cost" min="2" max="50" value="10" step="1">
+                            </div>
+                            
+                            <div class="simulator-control">
+                                <div class="control-label">
+                                    <span>Costo de Pérdida (Pérdida de Cliente Churn):</span>
+                                    <span class="value-display" id="loss-cost-val">$100 USD</span>
+                                </div>
+                                <input type="range" id="input-loss-cost" min="50" max="300" value="100" step="5">
+                            </div>
+                        </div>
+                        <div class="matrix-card">
+                            <h4>Distribución de Clasificación (Set de Prueba: 1,409)</h4>
+                            <div class="mini-matrix">
+                                <div class="matrix-cell tp" title="Verdadero Positivo (Detectado y retenido)">
+                                    <span class="cell-num">259</span>
+                                    <span class="cell-label">Retenidos (TP)</span>
+                                </div>
+                                <div class="matrix-cell fp" title="Falso Positivo (Acción preventiva gastada en vano)">
+                                    <span class="cell-num">224</span>
+                                    <span class="cell-label">Gasto Vano (FP)</span>
+                                </div>
+                                <div class="matrix-cell fn" title="Falso Negativo (Fuga no detectada, se pierde)">
+                                    <span class="cell-num">115</span>
+                                    <span class="cell-label">Perdidos (FN)</span>
+                                </div>
+                                <div class="matrix-cell tn" title="Verdadero Negativo (Clientes leales correctos)">
+                                    <span class="cell-num">811</span>
+                                    <span class="cell-label">Leales (TN)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column flex-center">
+                        <div class="roi-results-card">
+                            <h3><i class="fa-solid fa-coins"></i> Impacto Financiero Neto</h3>
+                            
+                            <div class="roi-row">
+                                <span>Costo Sin Modelo (Fuga total descontrolada):</span>
+                                <span class="roi-val red-text" id="cost-no-model">$37,400</span>
+                            </div>
+                            <div class="roi-row">
+                                <span>Costo Con Modelo (Costo Campañas + Fugas FN):</span>
+                                <span class="roi-val yellow-text" id="cost-with-model">$16,330</span>
+                            </div>
+                            
+                            <hr class="roi-divider">
+                            
+                            <div class="roi-row highlight-roi">
+                                <span>Ahorro Neto (Muestra de Test):</span>
+                                <span class="roi-val green-text" id="net-savings">$21,070</span>
+                            </div>
+                            
+                            <div class="savings-efficiency">
+                                <span>Reducción de Pérdidas de: <strong><span id="loss-reduction-pct">56.3%</span></strong></span>
+                            </div>
+                            
+                            <div class="roi-annual">
+                                <h4>Proyección de Ahorro Anual (Toda la Base de Datos)</h4>
+                                <span class="annual-val" id="annual-savings">$105,305 USD</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 9: Practical Recommendations -->
+        <section class="slide" id="slide-8">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">09</span>
+                    <h2>Propuestas Prácticas y Ejecutables</h2>
+                </div>
+                <div class="three-columns">
+                    <div class="card hover-expand">
+                        <div class="num-badge">1</div>
+                        <h3>Migración Incentivada de Contratos</h3>
+                        <p><strong>Problema:</strong> Contrato mes a mes (coeficiente +3.55) es un riesgo enorme.</p>
+                        <p><strong>Acción:</strong> Ofrecer un 15% de descuento en la tarifa mensual por 6 meses a clientes mes a mes con menos de 6 meses de antigüedad a cambio de migrar a un plan de permanencia de 1 año.</p>
+                        <span class="target-badge">Objetivo: Reducir Churn de corto plazo</span>
+                    </div>
+                    
+                    <div class="card hover-expand highlight-card">
+                        <div class="num-badge secondary">2</div>
+                        <h3>Paquetes de Asistencia de Fibra Óptica</h3>
+                        <p><strong>Problema:</strong> Clientes con fibra óptica y sin soporte técnico ni seguridad online tienen un Lift de fuga de 3.26x.</p>
+                        <p><strong>Acción:</strong> Integrar gratuitamente los servicios de <code>TechSupport</code> y <code>OnlineSecurity</code> por 6 meses en clientes de fibra óptica. Estabiliza el servicio y añade valor percibido.</p>
+                        <span class="target-badge">Objetivo: Neutralizar fricción técnica</span>
+                    </div>
+                    
+                    <div class="card hover-expand">
+                        <div class="num-badge">3</div>
+                        <h3>Migración a Pago Automático</h3>
+                        <p><strong>Problema:</strong> El pago por cheque electrónico tiene el coeficiente de riesgo más alto (+3.69).</p>
+                        <p><strong>Acción:</strong> Otorgar un abono único de $10 USD en la siguiente factura si el cliente inscribe su tarjeta de crédito o cuenta bancaria en el sistema de pago automático y facturación electrónica.</p>
+                        <span class="target-badge">Objetivo: Automatizar recaudación</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 10: Conclusions -->
+        <section class="slide" id="slide-9">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">10</span>
+                    <h2>Conclusiones del Proyecto</h2>
+                </div>
+                <div class="two-columns">
+                    <div class="column">
+                        <div class="card highlight-card">
+                            <h3><i class="fa-solid fa-chart-line"></i> Valor del Enfoque Analítico</h3>
+                            <p>El uso de la metodología <strong>CRISP-DM</strong> permitió conectar un problema puramente de negocio con una solución matemática rigurosa, eliminando suposiciones y basando las decisiones en datos empíricos.</p>
+                        </div>
+                        <div class="card">
+                            <h3><i class="fa-solid fa-shield-halved"></i> Robustez e Implementación</h3>
+                            <ul>
+                                <li>El tratamiento del balanceo de clases con <strong>SMOTE</strong> y la evaluación estricta Train vs. Test previenen pérdidas financieras por decisiones basadas en modelos con overfitting (como Random Forest).</li>
+                                <li>El modelo de **Regresión Logística** está listo para integrarse en producción gracias a su alta interpretabilidad y velocidad de ejecución.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="card">
+                            <h3><i class="fa-solid fa-flag-checkered"></i> Resumen de Logros Metodológicos</h3>
+                            <div class="conclusion-metrics">
+                                <div class="concl-metric-item">
+                                    <span class="concl-metric-num">75.9%</span>
+                                    <span class="concl-metric-text">Exactitud de predicción en producción</span>
+                                </div>
+                                <div class="concl-metric-item">
+                                    <span class="concl-metric-num">69.2%</span>
+                                    <span class="concl-metric-text">Tasa de captura de clientes en fuga (Recall)</span>
+                                </div>
+                                <div class="concl-metric-item">
+                                    <span class="concl-metric-num">>56%</span>
+                                    <span class="concl-metric-text">Reducción potencial de pérdidas por fuga</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Bottom Navigation Controls -->
+    <footer class="bottom-nav">
+        <div class="nav-arrow-btn" id="prev-btn" title="Anterior (Flecha izquierda)">
+            <i class="fa-solid fa-chevron-left"></i>
+        </div>
+        <div class="slide-dots-container" id="dots-container">
+            <!-- Dynamically populated dots -->
+        </div>
+        <div class="nav-arrow-btn" id="next-btn" title="Siguiente (Flecha derecha / Espacio)">
+            <i class="fa-solid fa-chevron-right"></i>
+        </div>
+    </footer>
+
+    <!-- Keyboard info helper -->
+    <div id="keyboard-helper">
+        <i class="fa-regular fa-keyboard"></i>
+        <span>Navega con flechas <strong>&larr;</strong> <strong>&rarr;</strong></span>
+    </div>
+
+    <!-- Script References -->
+    <script src="script.js"></script>
+</body>
+</html>
