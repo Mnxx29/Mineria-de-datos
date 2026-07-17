@@ -159,11 +159,31 @@
                     <div class="card">
                         <div class="card-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
                         <h3>Análisis Exploratorio (EDA)</h3>
-                        <p>Se examinó la consistencia del dataset:</p>
-                        <ul>
-                            <li>Conversión manual de <code>TotalCharges</code> a numérica (corrigiendo espacios vacíos).</li>
-                            <li><strong>Outliers (IQR)</strong>: Se detectaron 0 outliers reales en variables continuas (antigüedad y cargos). Se justificó técnicamente no eliminar datos para no sesgar la distribución del negocio.</li>
+                        <p>Se examinó la consistencia y calidad del dataset:</p>
+                        <ul style="margin-bottom: 12px; font-size: 0.85rem; padding-left: 15px;">
+                            <li><strong>Análisis de Nulos:</strong> 0% nulos estructurales (NaN). Solo 11 celdas con espacios en blanco en <code>TotalCharges</code> (clientes con 0 meses) imputados como $0.</li>
+                            <li><strong>Outliers (IQR):</strong> Se detectaron 0 atípicos reales fuera del rango operativo. Se justificó conservar el 100% de los datos.</li>
                         </ul>
+                        <div class="boxplot-container" style="margin-top: 15px; padding: 10px; background: rgba(0,0,0,0.25); border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); text-align: center;">
+                            <span style="font-size: 0.7rem; color: var(--color-text-dim); display: block; margin-bottom: 5px; font-weight: 500;">Distribución Operativa (Rango IQR)</span>
+                            <svg width="100%" height="55" viewBox="0 0 200 55" style="display: block; margin: 0 auto;">
+                                <!-- Whisker line -->
+                                <line x1="20" y1="28" x2="180" y2="28" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="2 2" />
+                                <!-- Whiskers ends -->
+                                <line x1="20" y1="18" x2="20" y2="38" stroke="#94a3b8" stroke-width="1.5" />
+                                <line x1="180" y1="18" x2="180" y2="38" stroke="#94a3b8" stroke-width="1.5" />
+                                <!-- IQR Box -->
+                                <rect x="60" y="13" width="80" height="30" fill="rgba(14, 165, 233, 0.15)" stroke="var(--color-primary)" stroke-width="2" rx="2" />
+                                <!-- Median Line -->
+                                <line x1="95" y1="13" x2="95" y2="43" stroke="var(--color-secondary)" stroke-width="2.5" />
+                                <!-- Labels -->
+                                <text x="20" y="48" fill="#64748b" font-size="7" text-anchor="middle" font-family="'Inter', sans-serif">Mín</text>
+                                <text x="60" y="9" fill="#64748b" font-size="7" text-anchor="middle" font-family="'Inter', sans-serif">Q1 (25%)</text>
+                                <text x="95" y="48" fill="#64748b" font-size="7" text-anchor="middle" font-family="'Inter', sans-serif">Mediana</text>
+                                <text x="140" y="9" fill="#64748b" font-size="7" text-anchor="middle" font-family="'Inter', sans-serif">Q3 (75%)</text>
+                                <text x="180" y="48" fill="#64748b" font-size="7" text-anchor="middle" font-family="'Inter', sans-serif">Máx</text>
+                            </svg>
+                        </div>
                     </div>
                     
                     <div class="card highlight-card">
