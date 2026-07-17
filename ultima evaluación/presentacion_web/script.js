@@ -18,28 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeSidebarBtn = document.getElementById('close-sidebar');
     const navItems = document.querySelectorAll('.nav-item');
     
-    // --- ELEMENTOS DEL SIMULADOR ---
-    const inputRetention = document.getElementById('input-retention-cost');
-    const inputLoss = document.getElementById('input-loss-cost');
-    const labelRetention = document.getElementById('retention-cost-val');
-    const labelLoss = document.getElementById('loss-cost-val');
-    
-    const displayCostNoModel = document.getElementById('cost-no-model');
-    const displayCostWithModel = document.getElementById('cost-with-model');
-    const displayNetSavings = document.getElementById('net-savings');
-    const displayLossReduction = document.getElementById('loss-reduction-pct');
-    const displayAnnualSavings = document.getElementById('annual-savings');
-    
-    // --- DATOS ESTADÍSTICOS DEL MODELO RECOMENDADO (Regresión Logística - Set Prueba) ---
-    const TP = 259; // Clientes en fuga detectados y retenidos con éxito
-    const FP = 224; // Falsos positivos (reciben campaña pero no se iban a ir)
-    const FN = 115; // Fuga no detectada (se pierden completamente)
-    const TOTAL_CHURNERS = TP + FN; // 374 clientes
-    
-    // Tamaño total de base de datos = 7043
-    // Tamaño del set de prueba = 1409 (representa el 20%)
-    const DATABASE_SCALE_FACTOR = 7043 / 1409; 
-
     // --- CONFIGURACIÓN DE NAVEGACIÓN ---
     
     // Crear indicadores de puntos (dots)
@@ -153,52 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- SIMULADOR COSTO-BENEFICIO DE NEGOCIO ---
-    
-    function formatCurrency(val) {
-        return new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-            maximumFractionDigits: 0
-        }).format(val);
-    }
-    
-    function calculateROI() {
-        const retentionCost = parseFloat(inputRetention.value);
-        const lossCost = parseFloat(inputLoss.value);
-        
-        // Actualizar displays
-        labelRetention.textContent = `$${retentionCost} USD`;
-        labelLoss.textContent = `$${lossCost} USD`;
-        
-        // Cálculos
-        // 1. Sin Modelo: Todos los fugados reales se pierden
-        const costNoModel = TOTAL_CHURNERS * lossCost;
-        
-        // 2. Con Modelo (Regresión Logística):
-        // Costo de retener a los que detectamos (TP) + Costo gastado en falsas alertas (FP) + Costo de perder a los no detectados (FN)
-        const costWithModel = (TP * retentionCost) + (FP * retentionCost) + (FN * lossCost);
-        
-        // 3. Ahorro neto en el Set de Prueba
-        const netSavings = costNoModel - costWithModel;
-        
-        // 4. Porcentaje de Reducción de Pérdidas
-        const lossReductionPct = (netSavings / costNoModel) * 100;
-        
-        // 5. Ahorro Anual Proyectado (Toda la base de datos)
-        const annualSavings = netSavings * DATABASE_SCALE_FACTOR;
-        
-        // Renderizar resultados con animaciones / formatos
-        displayCostNoModel.textContent = formatCurrency(costNoModel);
-        displayCostWithModel.textContent = formatCurrency(costWithModel);
-        displayNetSavings.textContent = formatCurrency(netSavings);
-        displayLossReduction.textContent = `${lossReductionPct.toFixed(1)}%`;
-        displayAnnualSavings.textContent = formatCurrency(annualSavings);
-    }
-    
-    // Escuchar cambios de sliders
-    inputRetention.addEventListener('input', calculateROI);
-    inputLoss.addEventListener('input', calculateROI);
+
 
     // --- RENDERIZACIÓN DE GRÁFICOS (CHART.JS) ---
     
@@ -344,7 +277,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- INICIALIZACIÓN ---
     initDots();
     updateNavigation();
-    calculateROI();
     
     // Inicializar gráficos
     initMetricsChart();

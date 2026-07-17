@@ -52,7 +52,7 @@
             <li class="nav-item" data-slide="4">5. Evaluación y Overfitting</li>
             <li class="nav-item" data-slide="5">6. Hipótesis 1 (Supervisado)</li>
             <li class="nav-item" data-slide="6">7. Hipótesis 2 (No Supervisado)</li>
-            <li class="nav-item" data-slide="7">8. Simulador Costo-Beneficio</li>
+            <li class="nav-item" data-slide="7">8. Matrices de Confusión</li>
             <li class="nav-item" data-slide="8">9. Propuestas Prácticas</li>
             <li class="nav-item" data-slide="9">10. Conclusiones</li>
         </ul>
@@ -309,9 +309,10 @@
                 <div class="two-columns">
                     <div class="column">
                         <div class="card highlight-card">
-                            <h3><i class="fa-solid fa-check-double"></i> Hipótesis 1: Factores de Fuga</h3>
-                            <p class="hypothesis-quote">"El contrato mes a mes, los métodos de pago no automáticos y las tarifas elevadas de fibra óptica son los principales inductores del abandono."</p>
-                            <p><strong>Resultado: VALIDADA plenamente</strong>. El modelo supervisado aisló el impacto individual de las variables.</p>
+                            <h3><i class="fa-solid fa-check-double"></i> Hipótesis 1: Planteamiento</h3>
+                            <p class="hypothesis-quote">"Los clientes que mantienen una relación comercial a corto plazo (contrato mes a mes) y perciben los cargos mensuales más altos de la muestra, presentan una probabilidad significativamente mayor de abandonar la compañía en comparación con aquellos que poseen contratos de largo plazo."</p>
+                            <p style="margin-top: 10px; font-size: 0.9rem;"><strong>Criterio de validación:</strong> Esta hipótesis será evaluada mediante el modelo de Regresión Logística. El algoritmo nos permitirá validar si la combinación de un contrato flexible junto con cobros elevados se traduce estadísticamente en un aumento en la probabilidad de fuga (Churn).</p>
+                            <p style="margin-top: 8px;"><strong>Resultado: VALIDADA plenamente</strong>. El modelo supervisado aisló el impacto individual de las variables.</p>
                         </div>
                         <div class="card">
                             <h3>Interpretación de Coeficientes</h3>
@@ -338,121 +339,197 @@
                     <span class="slide-number">07</span>
                     <h2>Validación Hipótesis 2: Reglas de Asociación</h2>
                 </div>
-                <div class="two-columns">
-                    <div class="column">
-                        <div class="card highlight-card">
-                            <h3><i class="fa-solid fa-share-nodes"></i> Hipótesis 2: Combinaciones Críticas</h3>
-                            <p class="hypothesis-quote">"El modelo no supervisado revelará reglas de asociación fuertes que relacionen contratos cortos y falta de servicios de asistencia técnica con la deserción."</p>
-                            <p><strong>Resultado: VALIDADA</strong>. El algoritmo Apriori encontró patrones combinatorios de alta probabilidad.</p>
+                <div class="two-columns" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: stretch;">
+                    <div class="column" style="display: flex; flex-direction: column; justify-content: space-between;">
+                        <div class="card highlight-card" style="padding: 15px; margin-bottom: 0; flex-grow: 1;">
+                            <h3><i class="fa-solid fa-share-nodes"></i> Hipótesis 2: Planteamiento</h3>
+                            <p class="hypothesis-quote" style="font-size: 0.9rem; line-height: 1.45; margin-bottom: 10px;">"Los clientes que contratan el servicio de internet, pero optan por no adquirir servicios de asistencia y protección (como soporte técnico o seguridad en línea) tienden a asociarse de forma recurrente con un abandono temprano de la compañía."</p>
+                            <p style="margin-top: 10px; font-size: 0.78rem; line-height: 1.4; color: var(--color-text-secondary);"><strong>Criterio de validación:</strong> Esta hipótesis se evaluará mediante el Algoritmo Apriori, buscando demostrar si la combinación de la falta de soporte técnico y la falta de seguridad en línea genera una regla de asociación con alta fuerza de confianza que desemboque en la fuga del cliente.</p>
+                            <p style="margin-top: 8px; font-size: 0.8rem;"><strong>Resultado: VALIDADA</strong>. El algoritmo Apriori encontró patrones combinatorios de alta probabilidad.</p>
                         </div>
-                        <div class="rule-box">
-                            <div class="rule-title">Regla de Oro Encontrada (ID #12)</div>
-                            <div class="rule-formula">
-                                <span>{Contrato Mes a Mes, Sin Seguridad Online, Sin Soporte Técnico, Internet Fibra Óptica}</span>
-                                <i class="fa-solid fa-arrow-right"></i>
-                                <span class="rule-consequent">Fuga de Cliente (Churn_Yes)</span>
-                            </div>
-                            <div class="rule-stats">
-                                <div class="stat-mini"><strong>Soporte:</strong> 12.16% (855 casos)</div>
-                                <div class="stat-mini"><strong>Confianza:</strong> 60.13%</div>
-                                <div class="stat-mini"><strong>Lift:</strong> 3.26x</div>
+                        
+                        <div class="rule-box" style="margin-top: 10px; padding: 10px; background: rgba(15, 23, 42, 0.4); border-radius: 8px; border: 1px solid var(--color-border);">
+                            <div class="rule-title" style="font-size: 0.75rem; text-transform: uppercase; color: var(--color-secondary); font-weight: 700; margin-bottom: 5px;">Regla Estratégica Descubierta (ID #12)</div>
+                            <div class="rule-formula" style="font-size: 0.75rem; font-family: monospace; color: #fff; line-height: 1.3;">
+                                <strong>Antecedentes:</strong> {Contrato Mes a Mes, Fibra Óptica, Sin Soporte, Sin Seguridad} <br>
+                                <strong style="color: var(--color-danger);">Consecuente:</strong> Fuga de Cliente (Churn)
                             </div>
                         </div>
                     </div>
-                    <div class="column">
-                        <div class="card">
-                            <h3>Significado Métrico para el Negocio</h3>
-                            <ul>
-                                <li><strong>Soporte (12.16%)</strong>: Representa un segmento masivo de la cartera de clientes, no un nicho aislado.</li>
-                                <li><strong>Confianza (60.13%)</strong>: Si un cliente cumple estos 4 factores, la probabilidad de que se vaya en los próximos 30 días es de 6 de cada 10.</li>
-                                <li><strong>Lift (3.26x)</strong>: Este grupo de clientes tiene **más del triple de probabilidad** de fugarse en comparación con un cliente promedio de la compañía.</li>
-                            </ul>
+                    
+                    <div class="column" style="display: flex; flex-direction: column; justify-content: space-between;">
+                        <!-- Diagrama de Flujo de la Regla -->
+                        <div class="card" style="padding: 15px; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; background: rgba(15, 23, 42, 0.45); border: 1px solid var(--color-border); margin-bottom: 0;">
+                            <h4 style="font-size: 0.85rem; text-transform: uppercase; color: var(--color-text-secondary); margin-bottom: 12px; align-self: flex-start; letter-spacing: 0.05em;"><i class="fa-solid fa-diagram-project" style="color: var(--color-secondary);"></i> Relación Causal (Diagrama de la Regla)</h4>
+                            
+                            <div class="rule-flow-container" style="display: flex; align-items: center; justify-content: center; gap: 15px; width: 100%; margin: 5px 0;">
+                                <!-- Antecedentes Grid -->
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+                                    <div style="background: rgba(139, 92, 246, 0.12); border: 1px solid rgba(139, 92, 246, 0.3); padding: 5px 8px; border-radius: 6px; font-size: 0.65rem; text-align: center; font-weight: 600; color: #fff; line-height: 1.1;">
+                                        Contrato Mes a Mes
+                                    </div>
+                                    <div style="background: rgba(139, 92, 246, 0.12); border: 1px solid rgba(139, 92, 246, 0.3); padding: 5px 8px; border-radius: 6px; font-size: 0.65rem; text-align: center; font-weight: 600; color: #fff; line-height: 1.1;">
+                                        Fibra Óptica
+                                    </div>
+                                    <div style="background: rgba(139, 92, 246, 0.12); border: 1px solid rgba(139, 92, 246, 0.3); padding: 5px 8px; border-radius: 6px; font-size: 0.65rem; text-align: center; font-weight: 600; color: #fff; line-height: 1.1;">
+                                        Sin Soporte Técnico
+                                    </div>
+                                    <div style="background: rgba(139, 92, 246, 0.12); border: 1px solid rgba(139, 92, 246, 0.3); padding: 5px 8px; border-radius: 6px; font-size: 0.65rem; text-align: center; font-weight: 600; color: #fff; line-height: 1.1;">
+                                        Sin Seguridad Online
+                                    </div>
+                                </div>
+                                
+                                <!-- Arrow and stats label -->
+                                <div style="display: flex; flex-direction: column; align-items: center; min-width: 55px;">
+                                    <span style="font-size: 0.62rem; color: var(--color-accent); font-weight: 700; margin-bottom: 2px;">Conf: 60%</span>
+                                    <div style="width: 35px; height: 2px; background: linear-gradient(90deg, var(--color-secondary), var(--color-danger)); position: relative; display: flex; align-items: center; justify-content: flex-end;">
+                                        <div style="width: 0; height: 0; border-top: 3px solid transparent; border-left: 5px solid var(--color-danger); border-bottom: 3px solid transparent; position: absolute; right: -4px;"></div>
+                                    </div>
+                                    <span style="font-size: 0.62rem; color: var(--color-warning); font-weight: 700; margin-top: 2px;">Lift: 3.26x</span>
+                                </div>
+                                
+                                <!-- Consecuente Node -->
+                                <div style="background: rgba(239, 68, 68, 0.18); border: 2px solid var(--color-danger); box-shadow: 0 0 12px rgba(239, 68, 68, 0.3); padding: 10px; border-radius: 50%; width: 68px; height: 68px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; flex-shrink: 0; animation: pulse 2.5s infinite ease-in-out;">
+                                    <span style="font-size: 0.58rem; font-weight: 700; color: #fff; text-transform: uppercase;">Abandono</span>
+                                    <span style="font-size: 0.8rem; font-weight: 800; color: #fff;">CHURN</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Tarjetas de Métricas Circulares / KPI -->
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px;">
+                            <!-- Soporte Card -->
+                            <div style="background: rgba(30, 41, 59, 0.4); border: 1px solid var(--color-border); border-radius: 8px; padding: 8px 5px; text-align: center;">
+                                <div style="font-size: 1.15rem; font-weight: 800; color: var(--color-primary); margin-bottom: 2px;">12.16%</div>
+                                <div style="font-size: 0.6rem; color: var(--color-text-secondary); font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em;">Soporte</div>
+                                <div style="font-size: 0.58rem; color: var(--color-text-dim); margin-top: 1px;">855 casos (12%)</div>
+                            </div>
+                            <!-- Confianza Card -->
+                            <div style="background: rgba(30, 41, 59, 0.4); border: 1px solid var(--color-border); border-radius: 8px; padding: 8px 5px; text-align: center;">
+                                <div style="font-size: 1.15rem; font-weight: 800; color: var(--color-accent); margin-bottom: 2px;">60.13%</div>
+                                <div style="font-size: 0.6rem; color: var(--color-text-secondary); font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em;">Confianza</div>
+                                <div style="font-size: 0.58rem; color: var(--color-text-dim); margin-top: 1px;">Probabilidad de fuga</div>
+                            </div>
+                            <!-- Lift Card -->
+                            <div style="background: rgba(30, 41, 59, 0.4); border: 1px solid var(--color-border); border-radius: 8px; padding: 8px 5px; text-align: center;">
+                                <div style="font-size: 1.15rem; font-weight: 800; color: var(--color-warning); margin-bottom: 2px;">3.26x</div>
+                                <div style="font-size: 0.6rem; color: var(--color-text-secondary); font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em;">Lift</div>
+                                <div style="font-size: 0.58rem; color: var(--color-text-dim); margin-top: 1px;">Propensión</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Slide 8: Interactive Cost-Benefit Simulator -->
+        <!-- Slide 8: Confusion Matrix Comparison -->
         <section class="slide" id="slide-7">
             <div class="slide-content">
                 <div class="slide-header">
                     <span class="slide-number">08</span>
-                    <h2>Simulador de Negocio: Retorno de Inversión (ROI)</h2>
+                    <h2>Evaluación: Comparativa de Matrices de Confusión</h2>
                 </div>
-                <div class="two-columns">
-                    <div class="column">
-                        <div class="card highlight-card">
-                            <h3><i class="fa-solid fa-sliders"></i> Parámetros Financieros</h3>
-                            <p>Ajusta los costos para simular el impacto financiero del modelo de Regresión Logística:</p>
-                            
-                            <div class="simulator-control">
-                                <div class="control-label">
-                                    <span>Costo de Retención (Campañas/Descuento):</span>
-                                    <span class="value-display" id="retention-cost-val">$10 USD</span>
-                                </div>
-                                <input type="range" id="input-retention-cost" min="2" max="50" value="10" step="1">
+                <div class="two-columns" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: stretch; margin-bottom: 5px;">
+                    <!-- Column 1: Logistic Regression -->
+                    <div class="column" style="display: flex; flex-direction: column; justify-content: space-between;">
+                        <div class="card highlight-card" style="padding: 12px; margin-bottom: 0; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                            <div>
+                                <h3 style="font-size: 1.05rem; margin-bottom: 4px;"><i class="fa-solid fa-circle-check" style="color: var(--color-accent);"></i> Regresión Logística (Elegido)</h3>
+                                <p style="font-size: 0.75rem; color: var(--color-text-secondary); line-height: 1.35; margin-bottom: 8px;">
+                                    Modelo balanceado y robusto. Captura **32 fugas más** que Random Forest y tiene un 21.7% menos de falsos negativos.
+                                </p>
                             </div>
                             
-                            <div class="simulator-control">
-                                <div class="control-label">
-                                    <span>Costo de Pérdida (Pérdida de Cliente Churn):</span>
-                                    <span class="value-display" id="loss-cost-val">$100 USD</span>
+                            <!-- Matrix layout using grid -->
+                            <div class="matrix-card-large" style="padding: 10px; background: rgba(15, 23, 42, 0.4); border-radius: 8px; border: 1px solid var(--color-border); display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto 1fr; gap: 6px;">
+                                <!-- Top-Left Empty -->
+                                <div></div>
+                                <!-- Top Header X -->
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; text-align: center; font-size: 0.68rem; font-weight: 600; color: var(--color-text-secondary); margin-bottom: 2px;">
+                                    <span>Predice: Leal (0)</span>
+                                    <span>Predice: Fuga (1)</span>
                                 </div>
-                                <input type="range" id="input-loss-cost" min="50" max="300" value="100" step="5">
-                            </div>
-                        </div>
-                        <div class="matrix-card">
-                            <h4>Distribución de Clasificación (Set de Prueba: 1,409)</h4>
-                            <div class="mini-matrix">
-                                <div class="matrix-cell tp" title="Verdadero Positivo (Detectado y retenido)">
-                                    <span class="cell-num">259</span>
-                                    <span class="cell-label">Retenidos (TP)</span>
+                                <!-- Left Header Y -->
+                                <div style="display: flex; flex-direction: column; justify-content: space-around; font-size: 0.68rem; font-weight: 600; color: var(--color-text-secondary); width: 60px; text-align: right; padding-right: 6px; font-family: var(--font-heading); line-height: 1.1;">
+                                    <span>Es Leal (0)</span>
+                                    <span>Es Fuga (1)</span>
                                 </div>
-                                <div class="matrix-cell fp" title="Falso Positivo (Acción preventiva gastada en vano)">
-                                    <span class="cell-num">224</span>
-                                    <span class="cell-label">Gasto Vano (FP)</span>
-                                </div>
-                                <div class="matrix-cell fn" title="Falso Negativo (Fuga no detectada, se pierde)">
-                                    <span class="cell-num">115</span>
-                                    <span class="cell-label">Perdidos (FN)</span>
-                                </div>
-                                <div class="matrix-cell tn" title="Verdadero Negativo (Clientes leales correctos)">
-                                    <span class="cell-num">811</span>
-                                    <span class="cell-label">Leales (TN)</span>
+                                <!-- Cells Grid -->
+                                <div class="mini-matrix" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; height: 100px;">
+                                    <div class="matrix-cell tn" style="display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 4px; border-radius: 6px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);" title="Clientes leales clasificados correctamente.">
+                                        <span style="font-size: 1.3rem; font-weight: 800; color: #fff;">809</span>
+                                        <span style="font-size: 0.58rem; color: var(--color-text-dim); text-transform: uppercase;">Leales (TN)</span>
+                                    </div>
+                                    <div class="matrix-cell fp" style="display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 4px; border-radius: 6px; background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.15);" title="Clientes leales clasificados como fuga.">
+                                        <span style="font-size: 1.3rem; font-weight: 800; color: var(--color-warning);">224</span>
+                                        <span style="font-size: 0.58rem; color: var(--color-text-dim); text-transform: uppercase;">Gasto Vano (FP)</span>
+                                    </div>
+                                    <div class="matrix-cell fn" style="display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 4px; border-radius: 6px; background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.15);" title="Fugas no detectadas.">
+                                        <span style="font-size: 1.3rem; font-weight: 800; color: var(--color-danger);">115</span>
+                                        <span style="font-size: 0.58rem; color: var(--color-text-dim); text-transform: uppercase;">Perdidos (FN)</span>
+                                    </div>
+                                    <div class="matrix-cell tp" style="display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 4px; border-radius: 6px; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.15);" title="Fugas detectadas y retenidas.">
+                                        <span style="font-size: 1.3rem; font-weight: 800; color: var(--color-accent);">259</span>
+                                        <span style="font-size: 0.58rem; color: var(--color-text-dim); text-transform: uppercase;">Retenidos (TP)</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="column flex-center">
-                        <div class="roi-results-card">
-                            <h3><i class="fa-solid fa-coins"></i> Impacto Financiero Neto</h3>
-                            
-                            <div class="roi-row">
-                                <span>Costo Sin Modelo (Fuga total descontrolada):</span>
-                                <span class="roi-val red-text" id="cost-no-model">$37,400</span>
-                            </div>
-                            <div class="roi-row">
-                                <span>Costo Con Modelo (Costo Campañas + Fugas FN):</span>
-                                <span class="roi-val yellow-text" id="cost-with-model">$16,330</span>
+                    
+                    <!-- Column 2: Random Forest -->
+                    <div class="column" style="display: flex; flex-direction: column; justify-content: space-between;">
+                        <div class="card danger-card" style="padding: 12px; margin-bottom: 0; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                            <div>
+                                <h3 style="font-size: 1.05rem; margin-bottom: 4px;"><i class="fa-solid fa-circle-exclamation" style="color: var(--color-danger);"></i> Random Forest (Descartado)</h3>
+                                <p style="font-size: 0.75rem; color: var(--color-text-secondary); line-height: 1.35; margin-bottom: 8px;">
+                                    Presenta sobreajuste (overfitting). Memorizó el ruido en entrenamiento y comete demasiados errores graves en test.
+                                </p>
                             </div>
                             
-                            <hr class="roi-divider">
-                            
-                            <div class="roi-row highlight-roi">
-                                <span>Ahorro Neto (Muestra de Test):</span>
-                                <span class="roi-val green-text" id="net-savings">$21,070</span>
-                            </div>
-                            
-                            <div class="savings-efficiency">
-                                <span>Reducción de Pérdidas de: <strong><span id="loss-reduction-pct">56.3%</span></strong></span>
-                            </div>
-                            
-                            <div class="roi-annual">
-                                <h4>Proyección de Ahorro Anual (Toda la Base de Datos)</h4>
-                                <span class="annual-val" id="annual-savings">$105,305 USD</span>
+                            <!-- Matrix layout using grid -->
+                            <div class="matrix-card-large" style="padding: 10px; background: rgba(15, 23, 42, 0.4); border-radius: 8px; border: 1px solid var(--color-border); display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto 1fr; gap: 6px;">
+                                <!-- Top-Left Empty -->
+                                <div></div>
+                                <!-- Top Header X -->
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; text-align: center; font-size: 0.68rem; font-weight: 600; color: var(--color-text-secondary); margin-bottom: 2px;">
+                                    <span>Predice: Leal (0)</span>
+                                    <span>Predice: Fuga (1)</span>
+                                </div>
+                                <!-- Left Header Y -->
+                                <div style="display: flex; flex-direction: column; justify-content: space-around; font-size: 0.68rem; font-weight: 600; color: var(--color-text-secondary); width: 60px; text-align: right; padding-right: 6px; font-family: var(--font-heading); line-height: 1.1;">
+                                    <span>Es Leal (0)</span>
+                                    <span>Es Fuga (1)</span>
+                                </div>
+                                <!-- Cells Grid -->
+                                <div class="mini-matrix" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; height: 100px;">
+                                    <div class="matrix-cell tn" style="display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 4px; border-radius: 6px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);" title="Clientes leales clasificados correctamente.">
+                                        <span style="font-size: 1.3rem; font-weight: 800; color: #fff;">845</span>
+                                        <span style="font-size: 0.58rem; color: var(--color-text-dim); text-transform: uppercase;">Leales (TN)</span>
+                                    </div>
+                                    <div class="matrix-cell fp" style="display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 4px; border-radius: 6px; background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.15);" title="Clientes leales clasificados como fuga.">
+                                        <span style="font-size: 1.3rem; font-weight: 800; color: var(--color-warning);">188</span>
+                                        <span style="font-size: 0.58rem; color: var(--color-text-dim); text-transform: uppercase;">Gasto Vano (FP)</span>
+                                    </div>
+                                    <div class="matrix-cell fn" style="display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 4px; border-radius: 6px; background: rgba(239, 68, 68, 0.15); border: 2px solid var(--color-danger); box-shadow: 0 0 6px rgba(239, 68, 68, 0.2);" title="Fugas no detectadas por overfitting.">
+                                        <span style="font-size: 1.3rem; font-weight: 800; color: var(--color-danger);">147</span>
+                                        <span style="font-size: 0.52rem; color: #fff; font-weight: 700; text-transform: uppercase; background: var(--color-danger); padding: 1px 4px; border-radius: 2px; margin-top: 1px;">Perdidos (FN)</span>
+                                    </div>
+                                    <div class="matrix-cell tp" style="display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 4px; border-radius: 6px; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.15);" title="Fugas detectadas y retenidas.">
+                                        <span style="font-size: 1.3rem; font-weight: 800; color: var(--color-accent);">227</span>
+                                        <span style="font-size: 0.58rem; color: var(--color-text-dim); text-transform: uppercase;">Retenidos (TP)</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                
+                <!-- Compact takeaway info bar -->
+                <div style="margin-top: 10px; display: flex; align-items: center; gap: 15px; padding: 8px 18px; background: rgba(14, 165, 233, 0.06); border: 1px solid rgba(14, 165, 233, 0.2); border-radius: 8px;">
+                    <div style="font-size: 1.2rem; color: var(--color-primary); line-height: 1;"><i class="fa-solid fa-lightbulb"></i></div>
+                    <div style="font-size: 0.78rem; color: var(--color-text-secondary); line-height: 1.35;">
+                        <strong>Conclusión de Negocio:</strong> Elegimos <strong>Regresión Logística</strong> porque captura 32 fugas adicionales (259 vs 227) y deja escapar 115 clientes (FN) en lugar de los 147 que se le escapan a Random Forest por culpa del overfitting. Perder clientes sin detectar es el error más costoso.
                     </div>
                 </div>
             </div>
